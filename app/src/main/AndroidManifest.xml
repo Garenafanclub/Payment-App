@@ -12,6 +12,9 @@
         android:theme="@style/Theme.EasePay"
         tools:targetApi="31">
         <activity
+            android:name=".PhoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashPage"
             android:exported="true">
             <intent-filter>
