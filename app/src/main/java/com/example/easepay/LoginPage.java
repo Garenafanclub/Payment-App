@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class LoginPage extends AppCompatActivity {
 
     TextView Email_Login , Password_Login , ForgetPass_Login;
@@ -25,6 +27,8 @@ public class LoginPage extends AppCompatActivity {
         EmailName_Login = findViewById(R.id.EmailName_Login);
         PasswordName_Login = findViewById(R.id.PasswordName_Login);
         Login_Button = findViewById(R.id.Login_Button);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         Login_Button.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),MainActivity.class)));

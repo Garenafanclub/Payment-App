@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533921446916",
+    "project_id": "easepay-42176",
+    "storage_bucket": "easepay-42176.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533921446916:android:6d4fc8e6c0c3f8bd13c951",
+        "android_client_info": {
+          "package_name": "com.example.easepay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533921446916-mbl76fsi08uhi39l7a9q39q50nh0a4u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlJQb00IQoRcsHwufi8_Q355nZVW6R8XI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533921446916-mbl76fsi08uhi39l7a9q39q50nh0a4u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
