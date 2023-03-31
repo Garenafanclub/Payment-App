@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--Permissions for internet-->
+    <!-- Permissions for internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -16,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasePay"
         tools:targetApi="31">
+        <activity
+            android:name=".DashBoard"
+            android:exported="false" />
         <activity
             android:name=".PhoneActivity"
             android:exported="false" />

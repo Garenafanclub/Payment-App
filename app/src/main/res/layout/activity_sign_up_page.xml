@@ -149,6 +149,22 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/bar_signup"
+        style="@android:style/Widget.ProgressBar.Large"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:progress="30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTintMode="src_atop"
+        android:progressTint="#0B1E1C"
+        android:progressBackgroundTint="#161918"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/StartActivity_SignUp"
         android:layout_width="wrap_content"

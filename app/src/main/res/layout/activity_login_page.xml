@@ -45,13 +45,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/edittext_background"
+            android:drawableLeft="@drawable/baseline_email_24"
             android:ems="10"
             android:hint="  example@gmail.com"
             android:inputType="textPersonName"
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
-            android:drawableLeft="@drawable/baseline_email_24"
             android:textSize="18sp" />
 
         <TextView
@@ -70,13 +70,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/edittext_background"
+            android:drawableLeft="@drawable/baseline_lock_24"
             android:ems="10"
             android:hint="  enter password"
             android:inputType="textPassword"
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
-            android:drawableLeft="@drawable/baseline_lock_24"
             android:textSize="18sp" />
 
         <TextView
@@ -162,10 +162,10 @@
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginBottom="20dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/background_button"
             android:text="Login"
             android:textColor="#ffffff"
@@ -173,6 +173,21 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/bar_login"
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:progress="30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:progressTint="#0B1E1C"
+            android:progressBackgroundTint="#161918"
+            tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/Topcontent_LoginActivity"

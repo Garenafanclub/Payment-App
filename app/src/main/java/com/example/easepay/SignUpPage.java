@@ -7,14 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,6 +28,7 @@ public class SignUpPage extends AppCompatActivity {
     EditText name_input, Email_input, pass_input, repass_input;
     TextView Name_SignUp , Email_SignUp , Password_SignUp , Repassword_SignUp;
     Button SignUp_Button;
+    ProgressBar bar_signup;
 
     private String name , email , password, repassword;
 
@@ -44,59 +48,85 @@ public class SignUpPage extends AppCompatActivity {
         Password_SignUp = findViewById(R.id.Password_SignUp);
         Repassword_SignUp = findViewById(R.id.Repassword_SignUp);
         SignUp_Button = findViewById(R.id.SignUp_Button);
+        bar_signup = findViewById(R.id.bar_signup);
         mAuth = FirebaseAuth.getInstance();
 
         SignUp_Button.setOnClickListener(v ->
         {
-            name = name_input.getText().toString().trim();
-            email = Email_input.getText().toString().trim();
-            password = pass_input.getText().toString().trim();
-            repassword = repass_input.getText().toString().trim();
-            boolean a= true;
-            boolean b= true;
-            boolean c= true;
-            boolean d= true;
-            if(TextUtils.isEmpty(name))
-            {
-                name_input.setError("Name is Required");
-                a=false;
-            }
-            if(TextUtils.isEmpty(email)) {
-                Email_input.setError("Email is Required");
-                b = false;
-            }
-            if(TextUtils.isEmpty(password))
-            {
-                pass_input.setError("password is Required");
-                c=false;
-            }
-            if(TextUtils.isEmpty(repassword))
-            {
-                repass_input.setError("repassword is Required");
-                d=false;
-            }
-            if(password.length()<=6)
-            {
-                pass_input.setError("password must be >= 6 characters");
-                c=false;
-            }
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            {
-                Email_input.setError("Please provide valid Email");
-                b=false;
-            }
-            if(!repassword.equals(password))
-            {
-                repass_input.setError("Please write your same password as you provide above");
-                repass_input.requestFocus();
-                c=false;
-            }
-            if(a && b && c && d){
-                // calling method to add data to Firebase Firestore.
-                addDataToFirestore(name, email, password);
-            }
+            createUser();
         });
     }
+    public void createUser()
+    {
+        name = name_input.getText().toString().trim();
+        email = Email_input.getText().toString().trim();
+        password = pass_input.getText().toString().trim();
+        repassword = repass_input.getText().toString().trim();
+        boolean a= true;
+        boolean b= true;
+        boolean c= true;
+        boolean d= true;
+        if(TextUtils.isEmpty(name))
+        {
+            name_input.setError("Name is Required");
+            name_input.requestFocus();
+            a=false;
+        }
+        if(TextUtils.isEmpty(email)) {
+            Email_input.setError("Email is Required");
+            Email_input.requestFocus();
+            b = false;
+        }
+        if(TextUtils.isEmpty(password))
+        {
+            pass_input.setError("password is Required");
+            pass_input.requestFocus();
+            c=false;
+        }
+        if(TextUtils.isEmpty(repassword))
+        {
+            repass_input.setError("repassword is Required");
+            repass_input.requestFocus();
+            d=false;
+        }
+        if(password.length()<=6)
+        {
+            pass_input.setError("password must be >= 6 characters");
+            c=false;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            Email_input.setError("Please provide valid Email");
+            b=false;
+        }
+        if(!repassword.equals(password))
+        {
+            repass_input.setError("Please write your same password as you provide above");
+            repass_input.requestFocus();
+            c=false;
+        }
+        if(a && b && c && d){
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                   if(task.isSuccessful())
+                   {
+                       Toast.makeText(getApplicationContext(),"User registered successfully",Toast.LENGTH_SHORT).show();
+                       startActivity(new Intent(getApplicationContext(),LoginPage.class));
+                       bar_signup.getProgress();
+                       overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                   }
+                   else{
+                       Toast.makeText(getApplicationContext(),"Registration Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                   }
+                }
+            });
+            // calling method to add data to Firebase Firestore.
+            // addDataToFirestore(name, email, password);
+        }
+    }
+}
+/*
     private void addDataToFirestore(String name, String email, String password) {
 
         // creating a collection reference
@@ -120,5 +150,4 @@ public class SignUpPage extends AppCompatActivity {
                 System.out.println(e);
             }
         });
-    }
-}
+ */
