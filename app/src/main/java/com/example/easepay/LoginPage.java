@@ -3,6 +3,7 @@ package com.example.easepay;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginPage extends AppCompatActivity {
 
     TextView Email_Login , Password_Login , ForgetPass_Login;
-    ProgressBar bar_login ;
+    ProgressDialog progressDialog;
     EditText EmailName_Login , PasswordName_Login;
     Button Login_Button;
     private String email , password;
@@ -39,10 +40,16 @@ public class LoginPage extends AppCompatActivity {
         EmailName_Login = findViewById(R.id.EmailName_Login);
         PasswordName_Login = findViewById(R.id.PasswordName_Login);
         Login_Button = findViewById(R.id.Login_Button);
-        bar_login = findViewById(R.id.bar_login);
+        progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        String titleId = "Processing...";
+        progressDialog.setTitle(titleId);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
 
 
         Login_Button.setOnClickListener(v ->
@@ -52,6 +59,7 @@ public class LoginPage extends AppCompatActivity {
     }
     private void loginUser()
     {
+        progressDialog.show();
         email = EmailName_Login.getText().toString().trim();
         password = PasswordName_Login.getText().toString().trim();
        boolean b = true;
@@ -83,12 +91,13 @@ public class LoginPage extends AppCompatActivity {
                public void onComplete(@NonNull Task<AuthResult> task) {
                    if(task.isSuccessful())
                    {
-                       Toast.makeText(getApplicationContext(),"User login is successfully",Toast.LENGTH_SHORT).show();
+                       progressDialog.dismiss();
+                       Toast.makeText(getApplicationContext(),"Successfully Logged in",Toast.LENGTH_SHORT).show();
                        startActivity(new Intent(getApplicationContext(),DashBoard.class));
-                       bar_login.getProgress();
                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                    }
                    else{
+                       progressDialog.dismiss();
                        Toast.makeText(getApplicationContext(),"Login Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                    }
                }

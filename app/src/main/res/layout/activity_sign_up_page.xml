@@ -150,20 +150,20 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/bar_signup"
-        style="@android:style/Widget.ProgressBar.Large"
+        android:id="@+id/progressBar_signup"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:indeterminate="true"
-        android:progress="30"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:background="@drawable/circle_shape"
+        style="?android:attr/progressBarStyleHorizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:indeterminateTintMode="src_atop"
-        android:progressTint="#0B1E1C"
-        android:progressBackgroundTint="#161918"
-        tools:ignore="MissingConstraints" />
+        android:max="100"
+        android:visibility="gone"
+        android:progress="50" />
 
     <TextView
         android:id="@+id/StartActivity_SignUp"

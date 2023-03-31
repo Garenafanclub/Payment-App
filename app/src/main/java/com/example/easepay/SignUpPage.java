@@ -3,6 +3,7 @@ package com.example.easepay;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,9 +27,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SignUpPage extends AppCompatActivity {
 
     EditText name_input, Email_input, pass_input, repass_input;
+    ProgressDialog pd;
     TextView Name_SignUp , Email_SignUp , Password_SignUp , Repassword_SignUp;
     Button SignUp_Button;
-    ProgressBar bar_signup;
 
     private String name , email , password, repassword;
 
@@ -48,8 +49,13 @@ public class SignUpPage extends AppCompatActivity {
         Password_SignUp = findViewById(R.id.Password_SignUp);
         Repassword_SignUp = findViewById(R.id.Repassword_SignUp);
         SignUp_Button = findViewById(R.id.SignUp_Button);
-        bar_signup = findViewById(R.id.bar_signup);
         mAuth = FirebaseAuth.getInstance();
+        pd = new ProgressDialog(this);
+        String titleId = "Signing in...";
+        pd.setTitle(titleId);
+        pd.setMessage("Please Wait...");
+        pd.setCancelable(false);
+        pd.setIndeterminate(true);
 
         SignUp_Button.setOnClickListener(v ->
         {
@@ -58,6 +64,7 @@ public class SignUpPage extends AppCompatActivity {
     }
     public void createUser()
     {
+        pd.show();
         name = name_input.getText().toString().trim();
         email = Email_input.getText().toString().trim();
         password = pass_input.getText().toString().trim();
@@ -111,12 +118,13 @@ public class SignUpPage extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                    if(task.isSuccessful())
                    {
+                       pd.dismiss();
                        Toast.makeText(getApplicationContext(),"User registered successfully",Toast.LENGTH_SHORT).show();
                        startActivity(new Intent(getApplicationContext(),LoginPage.class));
-                       bar_signup.getProgress();
                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                    }
                    else{
+                       pd.dismiss();
                        Toast.makeText(getApplicationContext(),"Registration Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                    }
                 }
