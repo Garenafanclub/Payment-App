@@ -7,7 +7,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
 
     Button  button_loginb , button;
 
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         button_loginb = findViewById(R.id.button_loginb);
         button = findViewById(R.id.button);
+        mAuth = FirebaseAuth.getInstance();
 
         button_loginb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,4 +39,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+//    protected  void onStart() {
+//
+//        super.onStart();
+//        FirebaseUser user  = mAuth.getCurrentUser();
+//        if(user == null)
+//        {
+//            startActivity(new Intent(getApplicationContext(),DashBoard.class));
+//        }
+//    }
 }

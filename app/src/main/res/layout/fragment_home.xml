@@ -38,11 +38,11 @@
                        android:orientation="vertical">
 
                        <androidx.appcompat.widget.AppCompatButton
+                           android:id="@+id/pay_button"
                            android:layout_width="50dp"
                            android:layout_height="50dp"
                            android:layout_gravity="center"
-                           android:text="Pay"
-                           android:src="@drawable/pass_ic_money_received"/>
+                           android:background="@drawable/pass_ic_money_received"/>
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
@@ -59,11 +59,11 @@
                   android:layout_margin="1dp"
                   android:orientation="vertical">
 
-                  <ImageView
+                  <androidx.appcompat.widget.AppCompatButton
                       android:layout_width="50dp"
                       android:layout_height="50dp"
                       android:layout_gravity="center"
-                      android:src="@drawable/pass_sa_other_wallets"/>
+                      android:background="@drawable/pass_sa_other_wallets"/>
 
                   <TextView
                       android:layout_width="wrap_content"
@@ -82,11 +82,11 @@
                        android:layout_margin="1dp"
                        android:orientation="vertical">
 
-                       <ImageView
+                       <androidx.appcompat.widget.AppCompatButton
                            android:layout_width="50dp"
                            android:layout_height="50dp"
                            android:layout_gravity="center"
-                           android:src="@drawable/pass_sa_gift_voucher"/>
+                           android:background="@drawable/pass_sa_gift_voucher"/>
 
                        <TextView
                            android:layout_width="wrap_content"
@@ -127,11 +127,11 @@
                        android:layout_margin="1dp"
                        android:orientation="vertical">
 
-                       <ImageView
+                       <androidx.appcompat.widget.AppCompatButton
                            android:layout_width="50dp"
                            android:layout_height="50dp"
                            android:layout_gravity="center"
-                           android:src="@drawable/wallet"/>
+                           android:background="@drawable/wallet"/>
 
                        <TextView
                            android:layout_width="wrap_content"
@@ -226,10 +226,10 @@
                        android:gravity="center"
                        android:orientation="vertical">
 
-                       <ImageView
+                       <androidx.appcompat.widget.AppCompatButton
                            android:layout_width="50dp"
                            android:layout_height="50dp"
-                           android:src="@drawable/ic_airplay"/>
+                           android:background="@drawable/ic_airplay"/>
 
                        <TextView
                            android:layout_width="wrap_content"

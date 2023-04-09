@@ -8,5 +8,23 @@
     tools:context=".PhoneActivity">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WELCOME"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pay_Button"
+        android:layout_width="169dp"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="196dp"
+        android:text="payment" />
+
 
 </RelativeLayout>

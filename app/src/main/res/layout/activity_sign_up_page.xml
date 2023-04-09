@@ -122,7 +122,7 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint=" ***********"
+            android:hint=" **********"
             android:inputType="textPassword"
             android:padding="8dp"
             android:textColor="#8e8e8e"

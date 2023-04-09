@@ -24,12 +24,16 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignUpPage extends AppCompatActivity {
 
     EditText name_input, Email_input, pass_input, repass_input;
     ProgressDialog pd;
     TextView Name_SignUp , Email_SignUp , Password_SignUp , Repassword_SignUp;
     Button SignUp_Button;
+    String user_id;
 
     private String name , email , password, repassword;
 
@@ -64,7 +68,6 @@ public class SignUpPage extends AppCompatActivity {
     }
     public void createUser()
     {
-        pd.show();
         name = name_input.getText().toString().trim();
         email = Email_input.getText().toString().trim();
         password = pass_input.getText().toString().trim();
@@ -113,6 +116,7 @@ public class SignUpPage extends AppCompatActivity {
             c=false;
         }
         if(a && b && c && d){
+            pd.show();
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -120,7 +124,16 @@ public class SignUpPage extends AppCompatActivity {
                    {
                        pd.dismiss();
                        Toast.makeText(getApplicationContext(),"User registered successfully",Toast.LENGTH_SHORT).show();
+                       user_id = mAuth.getCurrentUser().getUid();
+
+                       DocumentReference documentReference = db.collection("user_login").document(user_id);
+                       Map<String,Object> user = new HashMap<>();
+                       user.put("fName",name_input.getText().toString());
+                       user.put("Email",Email_input.getText().toString());
+
+                       documentReference.set(user).addOnSuccessListener(unused -> { });
                        startActivity(new Intent(getApplicationContext(),LoginPage.class));
+
                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                    }
                    else{

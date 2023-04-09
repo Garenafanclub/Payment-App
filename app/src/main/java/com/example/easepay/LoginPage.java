@@ -59,7 +59,8 @@ public class LoginPage extends AppCompatActivity {
     }
     private void loginUser()
     {
-        progressDialog.show();
+
+
         email = EmailName_Login.getText().toString().trim();
         password = PasswordName_Login.getText().toString().trim();
        boolean b = true;
@@ -86,6 +87,7 @@ public class LoginPage extends AppCompatActivity {
             b=false;
         }
         else if(b && c) {
+            progressDialog.show();
            mAuth.signInWithEmailAndPassword(email ,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                @Override
                public void onComplete(@NonNull Task<AuthResult> task) {
