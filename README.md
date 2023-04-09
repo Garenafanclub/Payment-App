@@ -1,2 +1,2 @@
-A Payment App using Android Studio where till now we just made Login SignUp Authentication..
+A Payment App using Android Studio and java..
 # Payment-App
