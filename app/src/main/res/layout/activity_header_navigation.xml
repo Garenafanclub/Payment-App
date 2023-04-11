@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -9,7 +10,9 @@
     android:paddingLeft="15dp"
     android:paddingTop="70dp"
     android:paddingBottom="10dp"
-    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+    tools:context=".DashBoard">
+
 
     <ImageView
         android:layout_width="50dp"
@@ -21,13 +24,14 @@
         android:layout_marginStart="10dp"
         android:orientation="vertical">
 
+
         <TextView
+            android:id="@+id/fetch_l"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mayank"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:textColor="@android:color/black"
+            android:text="@string/u_name"
             android:textSize="20sp"
             android:textStyle="bold"/>
         <TextView
@@ -35,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="bottom"
-            android:text="9416806570"
+            android:text="9416******"
             android:textColor="@android:color/black"/>
     </LinearLayout>
 

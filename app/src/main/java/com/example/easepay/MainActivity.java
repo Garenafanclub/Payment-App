@@ -7,10 +7,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+//    public static Object[] fname;
     FirebaseAuth mAuth;
 
     Button  button_loginb , button;
@@ -39,13 +40,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//    protected  void onStart() {
-//
-//        super.onStart();
-//        FirebaseUser user  = mAuth.getCurrentUser();
-//        if(user == null)
-//        {
-//            startActivity(new Intent(getApplicationContext(),DashBoard.class));
-//        }
-//    }
 }

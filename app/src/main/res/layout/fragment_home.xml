@@ -232,6 +232,7 @@
                            android:background="@drawable/ic_airplay"/>
 
                        <TextView
+                           android:id="@+id/movie"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="Movie Tickets"

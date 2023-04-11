@@ -142,33 +142,6 @@ public class SignUpPage extends AppCompatActivity {
                    }
                 }
             });
-            // calling method to add data to Firebase Firestore.
-            // addDataToFirestore(name, email, password);
         }
     }
 }
-/*
-    private void addDataToFirestore(String name, String email, String password) {
-
-        // creating a collection reference
-        // for our Firebase Firestore database.
-        CollectionReference dbCourses = db.collection("user_login");
-
-        // adding our data to our courses object class.
-        Courses courses = new Courses(name, email, password,repassword);
-
-        // below method is use to add data to Firebase Firestore.
-        dbCourses.add(courses).addOnSuccessListener(documentReference -> {
-            // after the data addition is successful
-            // we are displaying a success toast message.
-            Toast.makeText(SignUpPage.this, "Your account has been added to Firebase Firestore", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast message when data addition is failed.
-                Toast.makeText(SignUpPage.this, "Fail to add course \n" + e, Toast.LENGTH_SHORT).show();
-                System.out.println(e);
-            }
-        });
- */

@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class BankFragment extends Fragment {
+    LottieAnimationView laView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +55,9 @@ public class BankFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+//            laView.setAnimation(R.raw.lottie);
+//            laView.playAnimation();
+//            laView.loop(true);
         }
     }
 

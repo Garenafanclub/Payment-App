@@ -173,7 +173,7 @@
         android:layout_marginLeft="32dp"
         android:text="Start Activity"
         android:textColor="#ffffff"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"

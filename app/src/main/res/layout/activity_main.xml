@@ -7,15 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/start"
+        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/textView"
@@ -23,11 +25,15 @@
         android:layout_height="wrap_content"
         android:text="Welcome to EasePay"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="27sp"
         android:textColor="#723798"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        android:shadowColor="@color/purple_200"
+        android:shadowRadius="2"
+        android:shadowDy="2"
+        android:shadowDx="2"
+        app:layout_constraintEnd_toEndOf="@+id/animation"
+        app:layout_constraintStart_toStartOf="@+id/animation"
+        app:layout_constraintTop_toBottomOf="@+id/animation"
         tools:ignore="VisualLintOverlap" />
 
     <ImageView
@@ -89,10 +95,23 @@
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="23sp"
-
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="3"
+        android:shadowRadius="2"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:srcCompat="@drawable/logo" />-->

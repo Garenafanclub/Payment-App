@@ -72,12 +72,15 @@
             android:background="@drawable/edittext_background"
             android:drawableLeft="@drawable/baseline_lock_24"
             android:ems="10"
-            android:hint="  enter password"
+            app:placeholderText=""
             android:inputType="textPassword"
+            app:passwordToggleEnabled="true"
+            android:hint="  enter password"
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
 
         <TextView
             android:id="@+id/ForgetPass_Login"
