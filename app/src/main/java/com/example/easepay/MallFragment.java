@@ -3,10 +3,14 @@ package com.example.easepay;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +26,8 @@ public class MallFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
+    ViewPager2 viewPager2;
+    View view;
     private String mParam2;
 
     public MallFragment() {
@@ -59,6 +65,13 @@ public class MallFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mall, container, false);
+        View v  = inflater.inflate(R.layout.fragment_mall, container, false);
+        viewPager2 = v.findViewById(R.id.viewPager_slide);
+        List<SlideItem> sliderItem = new ArrayList<>();
+        sliderItem.add(new SlideItem(R.drawable.slider_two));
+        sliderItem.add(new SlideItem(R.drawable.slide_ten));
+
+        viewPager2.setAdapter(new SlideAdapter(sliderItem,viewPager2));
+        return v;
     }
 }

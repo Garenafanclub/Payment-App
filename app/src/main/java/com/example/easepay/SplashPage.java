@@ -25,7 +25,7 @@ public class SplashPage extends AppCompatActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
-        },2200);
+        },1900);
         //new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(),MainActivity.class)),2000);
     }
 }

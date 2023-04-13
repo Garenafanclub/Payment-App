@@ -4,20 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.razorpay.Checkout;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +43,9 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Handler slideHandler = new Handler();
     Button pay_button;
+    ViewPager2 viewPager2;
 
 
     View view;
@@ -68,8 +78,6 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            pay_button = pay_button.findViewById(R.id.pay_button);
-            pay_button.setOnClickListener(v -> getActivity().startActivity(new Intent(getActivity(),MallFragment.class)));
         }
     }
 
@@ -79,7 +87,42 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_home, container, false);
         pay_button = v.findViewById(R.id.pay_button);
-//        mov = (TextView)v.findViewById(R.id.movie);
+        viewPager2 = v.findViewById(R.id.viewPager);
+        List<SlideItem> sliderItem = new ArrayList<>();
+
+        sliderItem.add(new SlideItem(R.drawable.slide_twelve));
+        sliderItem.add(new SlideItem(R.drawable.slide_three));
+        sliderItem.add(new SlideItem(R.drawable.slide_four));
+        sliderItem.add(new SlideItem(R.drawable.slide_six));
+        sliderItem.add(new SlideItem(R.drawable.slide_eight));
+
+        viewPager2.setAdapter(new SlideAdapter(sliderItem,viewPager2));
+
+        viewPager2.setClipToPadding(false);
+        viewPager2.setClipChildren(false);
+        viewPager2.setOffscreenPageLimit(5);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+        compositePageTransformer.addTransformer(new MarginPageTransformer(30));
+        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                float r = 1-Math.abs(position);
+                page.setScaleY(0.85f + r*0.15f);
+                slideHandler.removeCallbacks(slideRunnable);
+                slideHandler.postDelayed(slideRunnable,2000);
+            }
+        });
+        viewPager2.setPageTransformer(compositePageTransformer);
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+        });
+
         Checkout.preload(getActivity());
         pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +131,23 @@ public class HomeFragment extends Fragment {
             }
         });
         return v;
+    }
+    private Runnable slideRunnable = new Runnable() {
+        @Override
+        public void run() {
+             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+        }
+    };
+
+    public void onPause()
+    {
+        super.onPause();
+        slideHandler.removeCallbacks(slideRunnable);
+    }
+    public void onResume() {
+
+        super.onResume();
+        slideHandler.postDelayed(slideRunnable,3000);
     }
     public void startPayment() {
 

@@ -16,7 +16,6 @@ import com.airbnb.lottie.LottieAnimationView;
  * create an instance of this fragment.
  */
 public class BankFragment extends Fragment {
-    LottieAnimationView laView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,9 +54,6 @@ public class BankFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-//            laView.setAnimation(R.raw.lottie);
-//            laView.playAnimation();
-//            laView.loop(true);
         }
     }
 

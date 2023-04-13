@@ -18,14 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            
-            <ImageView
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_slide"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/offer_pic"/>
+                android:layout_height="150dp"
+                android:layout_margin="7dp" />
+            
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:paddingRight="20dp"-->
+<!--                android:src="@drawable/offer_pic"/>-->
         
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -152,9 +158,9 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
-                android:src="@drawable/mall_img4"/>
+                android:paddingRight="10dp"
+                android:paddingLeft="25dp"
+                android:src="@drawable/offer_pic"/>
 
         </LinearLayout>
     </ScrollView>
