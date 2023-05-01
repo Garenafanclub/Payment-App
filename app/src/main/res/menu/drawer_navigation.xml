@@ -28,7 +28,7 @@
             android:title="Store"/>
         <item
             android:id="@+id/nav_my_loyalty_cards"
-            android:icon="@drawable/ic_local_play"
+            android:icon="@drawable/logout_image"
             android:onClick="doThis"
             android:title="LogOut"/>
     </group>
