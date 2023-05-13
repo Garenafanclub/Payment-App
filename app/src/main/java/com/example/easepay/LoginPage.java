@@ -22,8 +22,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginPage extends AppCompatActivity {
@@ -54,10 +57,20 @@ public class LoginPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Google_button = findViewById(R.id.Google_Button);
         Facebook_button = findViewById(R.id.Facebook_Button);
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         gsc = GoogleSignIn.getClient(this,gso);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Facebook_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),PhoneAuthLogin.class));
+            }
+        });
 
         String titleId = "Processing...";
         progressDialog.setTitle(titleId);
@@ -65,44 +78,57 @@ public class LoginPage extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
 
-        Google_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        Google_button.setOnClickListener(v -> signIn());
 
-        Login_Button.setOnClickListener(v ->
-        {
-            loginUser();
-        });
+        Login_Button.setOnClickListener(v -> loginUser());
     }
-    public void signIn()
+    public void onStart()
+    {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!= null)
+        {
+            startActivity(new Intent(getApplicationContext(),DashBoard.class));
+        }
+    }
+    private void signIn()
     {
         Intent signInIntent = gsc.getSignInIntent();
-        startActivityForResult(signInIntent,1000);
+        startActivityForResult(signInIntent,1002);
     }
     @Override
     protected void onActivityResult(int requestCode,int resultCode , Intent data)
     {
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == 1000)
+        if(requestCode == 1002)
         {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
-                task.getResult(ApiException.class);
-                navigationToSecondActivity();
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error in getting Google's Info", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
-    void navigationToSecondActivity()
+    private void firebaseAuthWithGoogle(String idToken)
     {
-        finish();
-        startActivity(new Intent(getApplicationContext(),DashBoard.class));
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken,null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful())
+                        {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            startActivity(new Intent(getApplicationContext(),DashBoard.class));
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Problem found in Firebase Login",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
     private void loginUser()
     {

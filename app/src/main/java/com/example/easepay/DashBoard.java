@@ -40,6 +40,7 @@ public class DashBoard extends AppCompatActivity {
     GoogleSignInClient gsc;
 
 //    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +58,17 @@ public class DashBoard extends AppCompatActivity {
                 R.string.navigation_drawer_open , R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         gsc = GoogleSignIn.getClient(this,gso);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct != null)
         {
             String PersonName = acct.getDisplayName();
-//            tw.setText(PersonName);
+           // tw.setText(PersonName);
         }
 
        // @SuppressLint("NonConstantResourceId")
